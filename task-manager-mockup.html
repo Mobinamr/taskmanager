@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Manager — React Project Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F4F6F8;
+  --surface: #FFFFFF;
+  --sidebar-bg: #FAFBFC;
+  --text: #1A1D21;
+  --text-secondary: #6B7280;
+  --text-hint: #9CA3AF;
+  --border: #E5E7EB;
+  --border-light: #F0F1F3;
+  --accent: #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-light: #EFF6FF;
+  --red: #EF4444;
+  --red-bg: #FEF2F2;
+  --red-text: #991B1B;
+  --amber: #F59E0B;
+  --amber-bg: #FFFBEB;
+  --amber-text: #92400E;
+  --green: #22C55E;
+  --green-bg: #F0FDF4;
+  --green-text: #166534;
+  --purple-bg: #F5F3FF;
+  --purple-text: #5B21B6;
+  --teal-bg: #F0FDFA;
+  --teal-text: #0F766E;
+  --blue-bg: #EFF6FF;
+  --blue-text: #1E40AF;
+  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+.topbar {
+  height: 52px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.topbar-logo {
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-logo svg { width: 16px; height: 16px; }
+
+.topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--text-hint);
+  width: 220px;
+  cursor: text;
+}
+
+.topbar-search svg { width: 14px; height: 14px; opacity: 0.5; }
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #818CF8, #6366F1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sb-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-hint);
+  padding: 0 12px;
+  margin-bottom: 8px;
+}
+
+.sb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 1px;
+  position: relative;
+}
+
+.sb-item:hover { background: #F0F1F3; color: var(--text); }
+.sb-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+
+.sb-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.55;
+}
+
+.sb-item.active svg { opacity: 1; color: var(--accent); }
+
+.sb-count {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-hint);
+  background: var(--bg);
+  padding: 1px 8px;
+  border-radius: 99px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.sb-item.active .sb-count {
+  background: #DBEAFE;
+  color: var(--accent);
+}
+
+.sb-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 12px;
+}
+
+.sb-add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text-hint);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.sb-add:hover { background: #F0F1F3; color: var(--text-secondary); }
+.sb-add svg { width: 14px; height: 14px; }
+
+.sb-bottom {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.sb-bottom-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text-hint);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.sb-bottom-item:hover { background: #F0F1F3; color: var(--text-secondary); }
+.sb-bottom-item svg { width: 15px; height: 15px; opacity: 0.5; }
+
+.main {
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.header-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-sort {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: var(--font);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.btn-sort:hover { border-color: #D1D5DB; background: var(--bg); }
+
+.btn-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-add:hover { background: var(--accent-hover); }
+.btn-add:active { transform: scale(0.98); }
+.btn-add svg { width: 14px; height: 14px; }
+
+.form-card {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.2px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.form-field input, .form-field select {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: var(--font);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+
+.form-field input:focus, .form-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-field input::placeholder { color: var(--text-hint); }
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: var(--font);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.btn-cancel:hover { background: var(--bg); }
+
+.btn-save {
+  padding: 8px 24px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-save:hover { background: var(--accent-hover); }
+
+.tasks { display: flex; flex-direction: column; gap: 6px; }
+
+.task {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.task:hover { border-color: var(--border); }
+.task.done { opacity: 0.45; }
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid #D1D5DB;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: all 0.15s;
+}
+
+.checkbox:hover { border-color: var(--accent); }
+.checkbox.checked { background: var(--accent); border-color: var(--accent); }
+.checkbox svg { width: 12px; height: 12px; display: none; }
+.checkbox.checked svg { display: block; }
+
+.task-body { flex: 1; min-width: 0; }
+
+.task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.task.done .task-title {
+  text-decoration: line-through;
+  color: var(--text-hint);
+}
+
+.task-meta {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.b-high { background: var(--red-bg); color: var(--red-text); }
+.b-medium { background: var(--amber-bg); color: var(--amber-text); }
+.b-low { background: var(--green-bg); color: var(--green-text); }
+.b-work { background: var(--purple-bg); color: var(--purple-text); }
+.b-personal { background: var(--teal-bg); color: var(--teal-text); }
+.b-learning { background: var(--blue-bg); color: var(--blue-text); }
+
+.due { font-size: 11px; font-weight: 500; }
+.due-today { color: var(--red); }
+.due-later { color: var(--text-hint); }
+.due-done { color: var(--green); }
+
+.task-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.task:hover .task-actions { opacity: 1; }
+
+.task-action-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-hint);
+  transition: all 0.15s;
+}
+
+.task-action-btn:hover { background: var(--bg); color: var(--text-secondary); }
+.task-action-btn.delete:hover { background: var(--red-bg); color: var(--red); }
+.task-action-btn svg { width: 14px; height: 14px; }
+
+.empty-state {
+  text-align: center;
+  padding: 48px 0;
+  color: var(--text-hint);
+}
+
+.empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.3; }
+.empty-state p { font-size: 14px; }
+
+.storage-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--green-bg);
+  color: var(--green-text);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid #BBF7D0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: fadeIn 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.storage-badge.show { opacity: 1; }
+.storage-badge svg { width: 13px; height: 13px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+  </div>
+  <span class="topbar-title">TaskFlow</span>
+  <div class="topbar-right">
+    <div class="topbar-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span>Search tasks...</span>
+    </div>
+    <div class="avatar">YO</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Categories</div>
+    <div id="sb-list"></div>
+    <div class="sb-divider"></div>
+    <div class="sb-add" id="sb-add-cat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      <span>New category</span>
+    </div>
+    <div class="sb-bottom">
+      <div class="sb-bottom-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Settings</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <div>
+        <h1 id="hdr-title">All tasks</h1>
+        <div class="header-sub" id="hdr-sub"></div>
+      </div>
+      <div class="header-actions">
+        <select class="btn-sort" id="sort-sel">
+          <option value="dueDate">Sort by due date</option>
+          <option value="priority">Sort by priority</option>
+          <option value="name">Sort by name</option>
+        </select>
+        <button class="btn-add" id="add-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add task
+        </button>
+      </div>
+    </div>
+    <div id="form-container"></div>
+    <div class="tasks" id="tasks"></div>
+  </div>
+</div>
+
+<div class="storage-badge" id="storage-badge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/></svg>
+  Saved to local storage
+</div>
+
+<script>
+const TASKS_KEY = "taskflow_tasks";
+
+const defaultTasks = [
+  { id: 1, title: "Build task manager UI components", cat: "Learning", pri: "high", due: "2026-03-19", done: false },
+  { id: 2, title: "Write API integration for Supabase", cat: "Work", pri: "high", due: "2026-03-19", done: false },
+  { id: 3, title: "Review pull request #42", cat: "Work", pri: "medium", due: "2026-03-19", done: false },
+  { id: 4, title: "Complete Next.js routing tutorial", cat: "Learning", pri: "medium", due: "2026-03-20", done: false },
+  { id: 5, title: "Grocery shopping", cat: "Personal", pri: "low", due: "2026-03-21", done: false },
+  { id: 6, title: "Plan weekend trip", cat: "Personal", pri: "low", due: "2026-03-22", done: false },
+  { id: 7, title: "Set up project repo", cat: "Work", pri: "high", due: "2026-03-18", done: true },
+];
+
+let tasks;
+try {
+  const saved = localStorage.getItem(TASKS_KEY);
+  tasks = saved ? JSON.parse(saved) : [...defaultTasks];
+} catch { tasks = [...defaultTasks]; }
+
+let selCat = "All tasks";
+let sortBy = "dueDate";
+let showForm = false;
+
+const cats = ["All tasks", "Work", "Personal", "Learning"];
+const priOrder = { high: 0, medium: 1, low: 2 };
+
+const catIcons = {
+  "All tasks": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+  "Work": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>',
+  "Personal": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>',
+  "Learning": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>',
+};
+
+function saveTasks() {
+  try {
+    localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+    const badge = document.getElementById("storage-badge");
+    badge.classList.add("show");
+    setTimeout(() => badge.classList.remove("show"), 1500);
+  } catch {}
+}
+
+function dueLabel(d, done) {
+  if (done) return { text: "Completed", cls: "due-done" };
+  const today = new Date(); today.setHours(0,0,0,0);
+  const dd = new Date(d + "T00:00:00");
+  const diff = Math.round((dd - today) / 86400000);
+  if (diff < 0) return { text: "Overdue", cls: "due-today" };
+  if (diff === 0) return { text: "Due today", cls: "due-today" };
+  if (diff === 1) return { text: "Tomorrow", cls: "due-later" };
+  return { text: dd.toLocaleDateString("en-US", { month: "short", day: "numeric" }), cls: "due-later" };
+}
+
+function render() {
+  const sbList = document.getElementById("sb-list");
+  sbList.innerHTML = cats.map(c => {
+    const count = c === "All tasks" ? tasks.length : tasks.filter(t => t.cat === c).length;
+    return `<div class="sb-item${selCat === c ? " active" : ""}" data-cat="${c}">
+      ${catIcons[c]}
+      <span>${c}</span>
+      <span class="sb-count">${count}</span>
+    </div>`;
+  }).join("");
+
+  sbList.querySelectorAll(".sb-item").forEach(el => {
+    el.onclick = () => { selCat = el.dataset.cat; render(); };
+  });
+
+  document.getElementById("hdr-title").textContent = selCat;
+
+  let filtered = selCat === "All tasks" ? [...tasks] : tasks.filter(t => t.cat === selCat);
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const todayCount = filtered.filter(t => !t.done && new Date(t.due + "T00:00:00") <= today).length;
+  document.getElementById("hdr-sub").textContent = `${filtered.length} task${filtered.length !== 1 ? "s" : ""} \u2014 ${todayCount} due today`;
+
+  filtered.sort((a, b) => {
+    if (a.done !== b.done) return a.done ? 1 : -1;
+    if (sortBy === "priority") return priOrder[a.pri] - priOrder[b.pri];
+    if (sortBy === "name") return a.title.localeCompare(b.title);
+    return new Date(a.due) - new Date(b.due);
+  });
+
+  const formContainer = document.getElementById("form-container");
+  if (showForm) {
+    formContainer.innerHTML = `
+      <div class="form-card">
+        <h3>New task</h3>
+        <div class="form-grid">
+          <div class="form-field" style="grid-column: 1 / -1">
+            <label>Task title</label>
+            <input id="f-title" placeholder="What needs to be done?" autofocus>
+          </div>
+          <div class="form-field">
+            <label>Category</label>
+            <select id="f-cat"><option>Work</option><option>Personal</option><option>Learning</option></select>
+          </div>
+          <div class="form-field">
+            <label>Priority</label>
+            <select id="f-pri"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+          </div>
+          <div class="form-field" style="grid-column: 1 / -1">
+            <label>Due date</label>
+            <input type="date" id="f-due" value="${new Date(Date.now() + 86400000).toISOString().slice(0, 10)}">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" id="f-cancel">Cancel</button>
+          <button class="btn-save" id="f-save">Save task</button>
+        </div>
+      </div>`;
+    document.getElementById("f-cancel").onclick = () => { showForm = false; render(); };
+    document.getElementById("f-save").onclick = () => {
+      const title = document.getElementById("f-title").value.trim();
+      if (!title) { document.getElementById("f-title").focus(); return; }
+      tasks.push({
+        id: Date.now(),
+        title,
+        cat: document.getElementById("f-cat").value,
+        pri: document.getElementById("f-pri").value,
+        due: document.getElementById("f-due").value,
+        done: false,
+      });
+      showForm = false;
+      saveTasks();
+      render();
+    };
+    document.getElementById("f-title").addEventListener("keydown", e => {
+      if (e.key === "Enter") document.getElementById("f-save").click();
+      if (e.key === "Escape") { showForm = false; render(); }
+    });
+  } else {
+    formContainer.innerHTML = "";
+  }
+
+  const tasksEl = document.getElementById("tasks");
+
+  if (filtered.length === 0) {
+    tasksEl.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <p>No tasks in this category</p>
+    </div>`;
+    return;
+  }
+
+  tasksEl.innerHTML = filtered.map(t => {
+    const d = dueLabel(t.due, t.done);
+    const priLabel = t.pri.charAt(0).toUpperCase() + t.pri.slice(1);
+    return `<div class="task${t.done ? " done" : ""}">
+      <div class="checkbox${t.done ? " checked" : ""}" data-id="${t.id}">
+        <svg viewBox="0 0 12 12"><path d="M2 6L5 9L10 3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="task-body">
+        <div class="task-title">${t.title}</div>
+        <div class="task-meta">
+          ${!t.done ? `<span class="badge b-${t.pri}">${priLabel}</span>` : ""}
+          <span class="badge b-${t.cat.toLowerCase()}">${t.cat}</span>
+          <span class="due ${d.cls}">${d.text}</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="task-action-btn delete" data-del="${t.id}" title="Delete">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }).join("");
+
+  tasksEl.querySelectorAll(".checkbox").forEach(el => {
+    el.onclick = () => {
+      const t = tasks.find(t => t.id === +el.dataset.id);
+      if (t) { t.done = !t.done; saveTasks(); render(); }
+    };
+  });
+
+  tasksEl.querySelectorAll("[data-del]").forEach(el => {
+    el.onclick = () => {
+      tasks = tasks.filter(t => t.id !== +el.dataset.del);
+      saveTasks();
+      render();
+    };
+  });
+}
+
+document.getElementById("add-btn").onclick = () => { showForm = !showForm; render(); };
+document.getElementById("sort-sel").onchange = (e) => { sortBy = e.target.value; render(); };
+render();
+</script>
+</body>
+</html>
