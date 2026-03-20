@@ -1,0 +1,18 @@
+.homepage-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: beige;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+
+.homepage {
+  flex: 1;  
+  background-color: rgb(164, 255, 191);
+  border-radius: 30px;
+}
