@@ -1,7 +1,7 @@
-.homepage-container {
+.main-container {
   display: flex;
-  height: 100vh;
   overflow: hidden;
+  flex: 1;
 }
 
 .sidebar {
@@ -15,4 +15,10 @@
   flex: 1;  
   background-color: rgb(164, 255, 191);
   border-radius: 30px;
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
