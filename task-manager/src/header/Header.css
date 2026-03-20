@@ -1,3 +1,22 @@
 .Header {
   height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.Left-part {
+  margin-right: auto;
+}
+
+.Right-part {
+  margin-left: auto;
+} 
+
+.input {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 10px;
+  border-radius: 6px;
+  border: 1px solid rgb(215, 215, 215);
+  background-color: rgb(248, 248, 248);
 }

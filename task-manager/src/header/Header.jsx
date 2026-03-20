@@ -3,7 +3,12 @@ import './Header.css'
 export function Header() {
   return (
     <div className='Header'>
-      <h1>TaskFlow</h1>
+      <div className='Left-part'>
+        <h1>Task Manager</h1>
+      </div>
+      <div className='Right-part'>
+        <input className='input' placeholder='search tasks' type="text" />
+      </div>
     </div>
   );
 }
