@@ -1,6 +1,7 @@
 import './HomePage.css';
+import './SideBar.css';
 import { Header } from '../header/Header';
-import { LayoutGrid, Feather } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 import { TbBriefcase2 } from "react-icons/tb";
 import { FaRegHeart } from "react-icons/fa";
 import { FiBookOpen } from "react-icons/fi";

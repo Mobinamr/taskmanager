@@ -4,13 +4,6 @@
   flex: 1;
 }
 
-.sidebar {
-  min-width: 235px;
-  max-width: 235px;
-  background-color: #FAFBFC;
-  margin-right: 10px;
-}
-
 .homepage {
   flex: 1;  
   background-color: rgb(164, 255, 191);
@@ -21,69 +14,4 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.sidebar-title {
-  font-size: 11px;
-  color: rgb(156, 156, 156);
-  font-weight: 500;
-  margin: 19px 14px 10px;
-}
-
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 0px 14px;
-  border-bottom: 1px solid rgb(231, 230, 230);  
-  padding-bottom: 20px;
-}
-
-.category-button {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  margin-top: 20px;
-  text-align: left;
-  background-color: transparent;
-  margin-left: 14px;
-  width: 207px;
-  font-size: 12px;
-}
-
-button {
-  display: flex;
-  align-items: center;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  text-align: left;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  color: rgb(156, 156, 156);
-  cursor: pointer;
-  background-color: transparent;
-}
-
-button:hover {
-  background-color: rgb(233, 233, 233);
-  color: black;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-.button-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  margin-left: 5px;
-  display: flex;
-  align-items: left;
-}
-
-.work-button-icon {
-  width: 17px;
-  height: 17px;
-  margin-right: 5px;
-  margin-left: 5px;
-  display: flex;
-  align-items: left;
 }
