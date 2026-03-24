@@ -1,4 +1,5 @@
 import './Header.css'
+import { CiSearch } from "react-icons/ci";
 
 export function Header() {
   return (
@@ -8,7 +9,10 @@ export function Header() {
         <h1>TaskFlow</h1>
       </div>
       <div className='Right-part'>
-        <input className='input' placeholder='search tasks...' type="text" />
+        <div className='input-container'>
+          <CiSearch className='search-icon' />
+          <input className='input' placeholder= 'search tasks...' type="text" />
+        </div>
       </div>
     </div>
   );

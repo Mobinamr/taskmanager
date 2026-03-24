@@ -47,9 +47,12 @@
   background-color: transparent;
   margin-left: 14px;
   width: 207px;
+  font-size: 12px;
 }
 
 button {
+  display: flex;
+  align-items: center;
   padding-top: 7px;
   padding-bottom: 7px;
   text-align: left;
@@ -65,4 +68,22 @@ button:hover {
   background-color: rgb(233, 233, 233);
   color: black;
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+  display: flex;
+  align-items: left;
+}
+
+.work-button-icon {
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+  margin-left: 5px;
+  display: flex;
+  align-items: left;
 }
