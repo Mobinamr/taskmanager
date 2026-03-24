@@ -2,14 +2,14 @@
   min-width: 235px;
   max-width: 235px;
   background-color: #FAFBFC;
-  margin-right: 10px;
+  border-right: 1px solid rgb(231, 230, 230);
 }
 
 .sidebar-title {
   font-size: 11px;
   color: rgb(156, 156, 156);
   font-weight: 500;
-  margin: 19px 14px 10px;
+  margin: 19px 14px 10px 25px;
 }
 
 .buttons-container {

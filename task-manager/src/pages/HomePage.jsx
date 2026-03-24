@@ -1,31 +1,20 @@
 import './HomePage.css';
 import './SideBar.css';
 import { Header } from '../header/Header';
-import { LayoutGrid } from 'lucide-react';
-import { TbBriefcase2 } from "react-icons/tb";
-import { FaRegHeart } from "react-icons/fa";
-import { FiBookOpen } from "react-icons/fi";
-import { GoPlus } from "react-icons/go";
+import { SideBar } from './SideBar';
+import { useState } from 'react';
 
 
 export function HomePage() {
+  const [title, setTitle] = useState('All tasks');
   return (
     <>
       <div className='homepage-container'>
         <Header />
         <div className='main-container'>
-          <div className='sidebar'>
-            <h1 className='sidebar-title' >CATEGORIES</h1>
-            <div className='buttons-container'>
-              <button> <LayoutGrid className='button-icon' /> All tasks</button>
-              <button> <TbBriefcase2 className='work-button-icon' /> Work</button>
-              <button> <FaRegHeart className='button-icon' /> Personal</button>
-              <button className='Learning-button'> <FiBookOpen className='button-icon' /> Learning</button>
-            </div>
-            <button className='category-button'> <GoPlus className='button-icon' /> Add category</button>
-          </div>
+          <SideBar setTitle={setTitle} />
           <div className="homepage">
-            <h2>HomePage</h2>
+            <h2 className='homepage-title'>{title}</h2>
           </div>
         </div>
       </div>

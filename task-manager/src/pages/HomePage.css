@@ -6,12 +6,15 @@
 
 .homepage {
   flex: 1;  
-  background-color: rgb(164, 255, 191);
-  border-radius: 30px;
+  background-color: #F4F6F8;
 }
 
 .homepage-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+.homepage-title {
+  margin-left: 25px;
 }
