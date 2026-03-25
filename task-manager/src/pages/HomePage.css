@@ -7,6 +7,8 @@
 .homepage {
   flex: 1;  
   background-color: #F4F6F8;
+  flex-direction: column;
+  display: flex;
 }
 
 .homepage-container {
@@ -16,5 +18,41 @@
 }
 
 .homepage-title {
+  margin-bottom: 0px;
+  display: flex;
+}
+
+.homepage-subtitle {
+  margin-top: 8px;
+  color: rgb(156, 156, 156);
+  font-weight: 300;
+  font-size: 15px;
+  display: flex;
+}
+
+.homepage-button-container {
+  display: flex;
+  gap: 10px;
   margin-left: 25px;
+  margin-top: 20px;
+}
+
+.homepage-header {
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  margin-right: 25px;
+  justify-content: space-between;
+}
+
+.date-button {
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 6px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  min-width: 200px;
+  appearance: none;
+  -webkit-appearance: none;
 }
