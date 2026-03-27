@@ -3,6 +3,7 @@ import './SideBar.css';
 import { Header } from '../header/Header';
 import { SideBar } from './SideBar';
 import { useState } from 'react';
+import { GoPlus } from "react-icons/go";
 
 
 export function HomePage() {
@@ -27,6 +28,7 @@ export function HomePage() {
                 </select>
 
                 <button className='add-task-button'>
+                  <GoPlus className='add-task-icon' />
                   Add Task
                 </button>
               </div>

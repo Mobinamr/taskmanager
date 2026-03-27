@@ -34,7 +34,6 @@
   display: flex;
   gap: 10px;
   margin-left: 25px;
-  margin-top: 20px;
 }
 
 .homepage-header {
@@ -46,13 +45,48 @@
 }
 
 .date-button {
-  border: 1px solid rgb(187, 187, 187);
-  border-radius: 6px;
-  padding-left: 10px;
-  padding-right: 20px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  min-width: 200px;
+  border: 1px solid rgb(221, 221, 221);
+  color: rgb(156, 156, 156);
+  border-radius: 8px;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   appearance: none;
   -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.date-button:hover {
+  background-color: rgb(240, 240, 240);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.add-task-button {
+  background-color: #2563EB;
+  color: white;
+  border: none;
+  padding: 0px 20px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.add-task-button:hover {
+  background-color: #1D4ED8;
+  transition: background-color 0.2s ease;
+  color: white;
+}
+
+.add-task-button:active {
+  background-color: #1E40AF;
+  transition: background-color 0.1s ease;
+  color: white;
+}
+
+.add-task-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
 }
