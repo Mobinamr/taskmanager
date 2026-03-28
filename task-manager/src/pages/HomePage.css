@@ -94,7 +94,25 @@
 .tasks {
   display: flex;
   flex-wrap: wrap;
+  flex: auto;
   gap: 20px;
   margin-top: 20px;
   margin-left: 25px;
+  margin-right: 20px;
+  background-color: white;
+  padding: 10px 20px 20px 20px;
+  border-radius: 8px;
+  border: rgb(242, 242, 242) solid 1px;
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  border: 2px solid rgb(193, 193, 193);
+  border-radius: 6px;
+  cursor: pointer;
 }
