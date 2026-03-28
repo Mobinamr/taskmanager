@@ -33,9 +33,21 @@ export function HomePage() {
                 </button>
               </div>
             </div>
+            <div className='tasks-container'>
+              <label className='tasks' htmlFor="">
+                <input type="checkbox" />
+                <span className='task-name'>Set up project repo</span>
+                <span className='task-date'>2024-06-30</span>
+              </label>
+              <label className='tasks' htmlFor="">
+                <input type="checkbox" />
+                <span className='task-name'>Build task manager UI components</span>
+                <span className='task-date'>2024-06-30</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </> 
   )
 }
